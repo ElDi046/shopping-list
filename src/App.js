@@ -9,7 +9,7 @@ const App = () => {
 	const [items, setItems] = useState([]);
 
 	const [inputValue, setInputValue] = useState('');
-	const [totalItemCount, setTotalItemCount] = useState(6);
+	var [totalItemCount, setTotalItemCount] = useState(0);
 
 	const handleAddButtonClick = () => {
 		const newItem = {
@@ -19,7 +19,6 @@ const App = () => {
 		};
 
 		const newItems = [...items, newItem];
-
 		setItems(newItems);
 		setInputValue('');
 		calculateTotal();
@@ -36,8 +35,10 @@ const App = () => {
 
 	const handleQuantityDecrease = (index) => {
 		const newItems = [...items];
-
-		newItems[index].quantity--;
+		if(newItems[index].quantity >= 2)
+		{
+			newItems[index].quantity--;
+		}
 
 		setItems(newItems);
 		calculateTotal();
@@ -52,7 +53,8 @@ const App = () => {
 	};
 
 	const calculateTotal = () => {
-		const totalItemCount = items.reduce((total, item) => {
+		var totalItemCount = items.reduce((total, item) => {
+
 			return total + item.quantity;
 		}, 0);
 
